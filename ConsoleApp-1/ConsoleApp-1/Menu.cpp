@@ -6,7 +6,7 @@ using namespace std;
 
 int main()
 {
-	cout << "Menu works";
+	cout << "Menu works"<<endl;
 	system("pause");
 	return 0;
 }

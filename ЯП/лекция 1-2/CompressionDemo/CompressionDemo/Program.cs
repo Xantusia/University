@@ -24,10 +24,26 @@ namespace CompressionDemo
             }
             compStream.Close();
         }
+        static void UncompressFile(string inFilename,
+string outFilename)
+        {
+            FileStream sourceFile = File.OpenRead(inFilename);
+            FileStream destFile = File.Create(outFilename);
+            GZipStream compStream =
+new GZipStream(sourceFile, CompressionMode.Decompress);
+            int theByte = compStream.ReadByte();
+            while (theByte != -1)
+            {
+                destFile.WriteByte((byte)theByte); theByte = compStream.ReadByte();
+            }
+            compStream.Close();
+
+        }
 
         static void Main(string[] args)
         {
             Program.CompressFile(@"z:\newfile.txt", @"z:\newfile.txt.gz");
+            Program.UncompressFile(@"z:\newfile.txt.gz", @"z:\newfile1.txt");
         }
     }
 }
